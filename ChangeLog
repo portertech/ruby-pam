@@ -1,3 +1,7 @@
+Sat Oct  9 09:11:51 UTC 2004 Takaaki Tateishi <ttate@users.sourceforge.net>
+
+	* PAMError should be defined under PAM module.
+
 Sat Dec 21 22:03:30 UTC 2002 Takaaki Tateishi <ttate@users.sourceforge.net>
 
 	* Use rb_define_alloc_func() for ruby-1.7.

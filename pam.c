@@ -1,5 +1,5 @@
 /* -*- C -*-
- * $Id: pam.c,v 1.1 2002/11/06 08:04:48 ttate Exp $
+ * $Id: pam.c,v 1.2 2004/10/09 09:19:43 ttate Exp $
  */
 
 #include "pam.h"
@@ -122,7 +122,7 @@ Init_pam()
   extern Init_pam_handle();
 
   rb_mPAM = rb_define_module("PAM");
-  rb_ePAMError = rb_define_class("PAMError",rb_eRuntimeError);
+  rb_ePAMError = rb_define_class_under(rb_mPAM, "PAMError",rb_eRuntimeError);
 
   rb_sPAMMessage = rb_struct_define("Message","msg_style","msg",0);
   rb_sPAMResponse = rb_struct_define("Response","resp","resp_retcode",0);
