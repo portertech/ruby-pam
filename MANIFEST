@@ -1,8 +1,8 @@
-doc/rfc86.0.txt
 test/check_get_item.rb
 test/check_user.rb
 test/gc_test.rb
 ChangeLog
+COPYING
 MANIFEST
 README
 depend
