@@ -1,0 +1,126 @@
+<html>
+<body bgcolor=white>
+$Id: README.html,v 1.1 2002/11/06 08:04:47 ttate Exp $
+
+<center>
+<h2>Ruby/PAM Module</h2>
+Copyright (C) 2000,2001,2002 Takaaki Tateishi (ttate@users.sourceforge.net)
+</center>
+
+<hr>
+
+Ruby/PAM(aka ruby-pam) is an extension library which provides the
+interface to PAM APIs.
+
+<hr>
+<h3>System Requirements</h3>
+
+I checked that this module can work on the following operating systems
+and environments.
+<ul>
+ <li>linux-2.4.0 + ruby-1.6.4 + glibc2.1.2
+ <li>solaris8 + ruby-1.6.0
+ <li>solaris7 + ruby-1.6.0
+</ul>
+
+
+<hr>
+<h3>Building and Installation</h3>
+
+At first, you have to obtain the ruby/pam archive. It is distributed
+from <a href="http://kt-www.jaist.ac.jp/~ttate/ftp/">
+http://kt-www.jaist.ac.jp/~ttate/ftp</a>
+as ruby-pam-x.x.tar.gz.
+The installation process is as follows:
+<ol>
+ <li>ruby extconf.rb
+ <li>make
+ <li>make install [optional]
+</ol>
+
+<hr>
+<h2>Methods</h2>
+
+service, user, item : String<br>
+conv : Proc or Symbol<br>
+msec, type, flag : Integer<br>
+
+<ul>
+ <li>PAM.start(service, user, conv, conv_data = nil){ ... }
+ <li>PAM::Handle.new(service, user, conv, conv_data = nil){ ... }
+ <li>PAM::Handle.start(service, user, conv, conv_data = nil){ ... }<br>
+ <li>PAM::Handle#end() -- called at the above block end.
+ <li>PAM::Handle#status()
+ <li>PAM::Handle#conv(msg)
+ <li>PAM::Handle#authenticate(flag)
+ <li>PAM::Handle#acct_mgmt(flag = 0)
+ <li>PAM::Handle#set_fail_delay(msec)
+ <li>PAM::Handle#setcred(flag = 0)
+ <li>PAM::Handle#chauthtok(flag = 0)
+ <li>PAM::Handle#open_session(flag = 0){ ... }
+ <li>PAM::Handle#close_session(flag = 0)
+ <li>PAM::Handle#set_item(type, item)
+ <li>PAM::Handle#get_item(type, item)
+ <li>PAM::Handle#strerror(errnum)
+ <li>PAM::Handle#putenv("veriable=value")
+ <li>PAM::Handle#getenv("veriable")
+</ul>
+
+<hr>
+<h2>Structures</h2>
+<ul>
+ <li>Message (Struct) -- Message.new(msg_style, msg)
+ <li>Response (Struct) -- Response.new(resp, resp_retcode)
+</ul>
+
+<hr>
+<h2>Exceptions</h2>
+<ul>
+ <li>PAMError (Class)
+ <li>PAM_SUCCESS
+ <li>PAM_OPEN_ERR
+ <li>...
+</ul>
+see 'pam_appl.h'
+
+<hr>
+<h2>'PAM::' Constants</h2>
+<ul>
+ <li>PAM_VERSION
+ <li>PAM_MAJOR_VERSION
+ <li>PAM_MINOR_VERSION
+ <li>PAM_CONV
+ <li>PAM_CHANGE_EXPIRED_AUTHTOK
+ <li>PAM_DELETE_CRED
+ <li>PAM_ERROR_MSG
+ <li>PAM_ESTABLISH_CRED
+ <li>PAM_OLDAUTHTOK
+ <li>PAM_PROMPT_ECHO_OFF
+ <li>PAM_PROMPT_ECHO_ON
+ <li>PAM_REFRESH_CRED
+ <li>PAM_REINITIALIZE_CRED
+ <li>PAM_RHOST
+ <li>PAM_RUSER
+ <li>PAM_SERVICE
+ <li>PAM_SILENT
+ <li>PAM_TEXT_INFO
+ <li>PAM_TTY
+ <li>PAM_USER
+ <li>PAM_USER_PROMPT
+ <li>PAM_DISALLOW_NULL_AUTHTOK
+</ul>
+
+<hr>
+<h2>Others</h2>
+
+<ul>
+ <li><a href="http://www.kernel.org/pub/linux/libs/pam/">
+     http://www.kernel.org/pub/linux/libs/pam/</a><br>
+     Linux-PAM (PAM implementation for Linux)
+ <li><a href="http://pam.sourceforge.net/mod_auth_pam/">
+     http://pam.sourceforge.net/mod_auth_pam/</a><br>
+     mod_auth_pam (apache authentication module using PAM)
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+doc/rfc86.0.txt
+test/check_get_item.rb
+test/check_user.rb
+test/gc_test.rb
+ChangeLog
+MANIFEST
+README
+README.html
+depend
+extconf.rb
+pam_handle.c
+pam.c
+pam.h

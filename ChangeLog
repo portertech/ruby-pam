@@ -1,0 +1,56 @@
+Mon Aug  5 01:50:12 UTC 2002 Takaaki Tateishi <ttate@kt.jaist.ac.jp>
+
+	* version 1.5
+
+Mon Aug  5 01:50:12 UTC 2002 Takaaki Tateishi <ttate@kt.jaist.ac.jp>
+
+	* Conform to the allocation framework.
+
+Mon Mar 18 20:06:59 UTC 2002 Takaaki Tateishi <ttate@kt.jaist.ac.jp>
+
+	* version 1.4
+
+Mon Mar 18 20:05:33 UTC 2002 Takaaki Tateishi <ttate@kt.jaist.ac.jp>
+
+	* pam_handle.c (rb_pam_handle_open_session): a block can be given
+	  for Handle#open_session.
+
+Fri Aug  3 21:54:58 JST 2001 Takaaki Tateishi <ttate@jaist.ac.jp>
+
+	* version 1.3
+
+Fri Aug  3 21:53:49 JST 2001 Takaaki Tateishi <ttate@jaist.ac.jp>
+
+	* pam_handle.c (rb_pam_handle_conv): new method Handle#conv
+
+Thu Aug  2 18:20:04 JST 2001 Takaaki Tateishi <ttate@jaist.ac.jp>
+
+	* pam_handle.c (rb_pam_handle_new): new function which is usually
+	  used by PAM/Ruby.
+
+	* pam.c: add some constants for PAM/Ruby
+
+Mon May 28 23:39:24 JST 2001 Takaaki Tateishi <ttate@jaist.ac.jp>
+
+	* version 1.1
+
+Mon May 28 22:11:20 JST 2001 Takaaki Tateishi <ttate@jaist.ac.jp>
+
+	* pam_handle.c (pam_handle_get_item): fix SEGV on c_type.
+
+	* pam_handle.c (pam_handle_authenticate): flags can be omitted.
+
+	* pam_handle.c (pam_handle_setcred): flags can be omitted.
+
+	* pam_handle.c (pam_handle_mgmt): flags can be omitted.
+
+	* pam_handle.c (rb_pam_handle_chauthtok): flags can be omitted.
+
+	* pam_handle.c (CREATE_PAM_CONV): conversation function has two
+	  arguments.
+
+	* pam.c (PAM_DISALLOW_NULL_AUTHTOK): added.
+
+Fri Sep 22 11:01:49 JST 2000 Takaaki Tateishi <ttate@jaist.ac.jp>
+
+	* version 1.0

@@ -1,0 +1,111 @@
+$Id: README,v 1.1 2002/11/06 08:04:47 ttate Exp $
+                                                                               
+                                Ruby/PAM Module                                
+                                                                               
+  Copyright (C) 2000,2001,2002 Takaaki Tateishi (ttate@users.sourceforge.net)  
+-------------------------------------------------------------------------------
+Ruby/PAM(aka ruby-pam) is an extension library which provides the interface to
+PAM APIs.
+-------------------------------------------------------------------------------
+
+System Requirements
+
+I checked that this module can work on the following operating systems and
+environments.
+
+  * linux-2.4.0 + ruby-1.6.4 + glibc2.1.2
+  * solaris8 + ruby-1.6.0
+  * solaris7 + ruby-1.6.0
+
+-------------------------------------------------------------------------------
+
+Building and Installation
+
+At first, you have to obtain the ruby/pam archive. It is distributed from http:
+//kt-www.jaist.ac.jp/~ttate/ftp as ruby-pam-x.x.tar.gz. The installation
+process is as follows:
+
+ 1. ruby extconf.rb
+ 2. make
+ 3. make install [optional]
+
+-------------------------------------------------------------------------------
+
+Methods
+
+service, user, item : String
+conv : Proc or Symbol
+msec, type, flag : Integer
+
+  * PAM.start(service, user, conv, conv_data = nil){ ... }
+  * PAM::Handle.new(service, user, conv, conv_data = nil){ ... }
+  * PAM::Handle.start(service, user, conv, conv_data = nil){ ... }
+  * PAM::Handle#end() -- called at the above block end.
+  * PAM::Handle#status()
+  * PAM::Handle#conv(msg)
+  * PAM::Handle#authenticate(flag)
+  * PAM::Handle#acct_mgmt(flag = 0)
+  * PAM::Handle#set_fail_delay(msec)
+  * PAM::Handle#setcred(flag = 0)
+  * PAM::Handle#chauthtok(flag = 0)
+  * PAM::Handle#open_session(flag = 0){ ... }
+  * PAM::Handle#close_session(flag = 0)
+  * PAM::Handle#set_item(type, item)
+  * PAM::Handle#get_item(type, item)
+  * PAM::Handle#strerror(errnum)
+  * PAM::Handle#putenv("veriable=value")
+  * PAM::Handle#getenv("veriable")
+
+-------------------------------------------------------------------------------
+
+Structures
+
+  * Message (Struct) -- Message.new(msg_style, msg)
+  * Response (Struct) -- Response.new(resp, resp_retcode)
+
+-------------------------------------------------------------------------------
+
+Exceptions
+
+  * PAMError (Class)
+  * PAM_SUCCESS
+  * PAM_OPEN_ERR
+  * ...
+
+see 'pam_appl.h'
+-------------------------------------------------------------------------------
+
+'PAM::' Constants
+
+  * PAM_VERSION
+  * PAM_MAJOR_VERSION
+  * PAM_MINOR_VERSION
+  * PAM_CONV
+  * PAM_CHANGE_EXPIRED_AUTHTOK
+  * PAM_DELETE_CRED
+  * PAM_ERROR_MSG
+  * PAM_ESTABLISH_CRED
+  * PAM_OLDAUTHTOK
+  * PAM_PROMPT_ECHO_OFF
+  * PAM_PROMPT_ECHO_ON
+  * PAM_REFRESH_CRED
+  * PAM_REINITIALIZE_CRED
+  * PAM_RHOST
+  * PAM_RUSER
+  * PAM_SERVICE
+  * PAM_SILENT
+  * PAM_TEXT_INFO
+  * PAM_TTY
+  * PAM_USER
+  * PAM_USER_PROMPT
+  * PAM_DISALLOW_NULL_AUTHTOK
+
+-------------------------------------------------------------------------------
+
+Others
+
+  * http://www.kernel.org/pub/linux/libs/pam/
+    Linux-PAM (PAM implementation for Linux)
+  * http://pam.sourceforge.net/mod_auth_pam/
+    mod_auth_pam (apache authentication module using PAM)
+
