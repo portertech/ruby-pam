@@ -1,5 +1,5 @@
 /* -*- C -*-
- * $Id: pam_handle.c,v 1.1 2002/11/06 08:04:48 ttate Exp $
+ * $Id: pam_handle.c,v 1.2 2002/12/21 22:09:35 ttate Exp $
  */
 
 #include "pam.h"
@@ -656,7 +656,11 @@ Init_pam_handle()
   rb_define_singleton_method(rb_cPAMHandle,"new",rb_pam_handle_s_start,-1);
 #endif
   rb_define_singleton_method(rb_cPAMHandle,"start",rb_pam_handle_s_start,-1);
+#if RUBY_VERSION_CODE >= 173
+  rb_define_alloc_func(rb_cPAMHandle,rb_pam_handle_s_allocate);
+#else
   rb_define_singleton_method(rb_cPAMHandle,"allocate",rb_pam_handle_s_allocate,0);
+#endif
 
 #define rb_pamh_define_method(name,func,argc) \
   rb_define_method(rb_cPAMHandle,name,func,argc)

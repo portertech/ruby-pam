@@ -1,3 +1,7 @@
+Sat Dec 21 22:03:30 UTC 2002 Takaaki Tateishi <ttate@users.sourceforge.net>
+
+	* Use rb_define_alloc_func() for ruby-1.7.
+
 Mon Aug  5 01:50:12 UTC 2002 Takaaki Tateishi <ttate@kt.jaist.ac.jp>
 
 	* version 1.5
