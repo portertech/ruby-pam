@@ -1,15 +1,12 @@
-$Id: README,v 1.1 2002/11/06 08:04:47 ttate Exp $
-                                                                               
                                 Ruby/PAM Module                                
                                                                                
-  Copyright (C) 2000,2001,2002 Takaaki Tateishi (ttate@users.sourceforge.net)  
--------------------------------------------------------------------------------
-Ruby/PAM(aka ruby-pam) is an extension library which provides the interface to
-PAM APIs.
--------------------------------------------------------------------------------
+  Copyright (C) 2000,2001,2002,2003 Takaaki Tateishi (ttate@users.sourceforge.net)  
+
+Ruby/PAM is an extension library which provides the interface to PAM APIs and
+is distributed at http://ruby-pam.sourceforge.net/.
 
 System Requirements
-
+--------------------
 I checked that this module can work on the following operating systems and
 environments.
 
@@ -17,22 +14,16 @@ environments.
   * solaris8 + ruby-1.6.0
   * solaris7 + ruby-1.6.0
 
--------------------------------------------------------------------------------
 
-Building and Installation
-
-At first, you have to obtain the ruby/pam archive. It is distributed from http:
-//kt-www.jaist.ac.jp/~ttate/ftp as ruby-pam-x.x.tar.gz. The installation
-process is as follows:
+Installation
+-------------
 
  1. ruby extconf.rb
  2. make
  3. make install [optional]
 
--------------------------------------------------------------------------------
-
 Methods
-
+---------
 service, user, item : String
 conv : Proc or Symbol
 msec, type, flag : Integer
@@ -56,27 +47,22 @@ msec, type, flag : Integer
   * PAM::Handle#putenv("veriable=value")
   * PAM::Handle#getenv("veriable")
 
--------------------------------------------------------------------------------
-
 Structures
-
+------------
   * Message (Struct) -- Message.new(msg_style, msg)
   * Response (Struct) -- Response.new(resp, resp_retcode)
 
--------------------------------------------------------------------------------
-
 Exceptions
-
+------------
   * PAMError (Class)
   * PAM_SUCCESS
   * PAM_OPEN_ERR
   * ...
-
 see 'pam_appl.h'
--------------------------------------------------------------------------------
+
 
 'PAM::' Constants
-
+------------------
   * PAM_VERSION
   * PAM_MAJOR_VERSION
   * PAM_MINOR_VERSION
@@ -100,10 +86,9 @@ see 'pam_appl.h'
   * PAM_USER_PROMPT
   * PAM_DISALLOW_NULL_AUTHTOK
 
--------------------------------------------------------------------------------
 
 Others
-
+-------
   * http://www.kernel.org/pub/linux/libs/pam/
     Linux-PAM (PAM implementation for Linux)
   * http://pam.sourceforge.net/mod_auth_pam/

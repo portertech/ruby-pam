@@ -5,7 +5,6 @@ test/gc_test.rb
 ChangeLog
 MANIFEST
 README
-README.html
 depend
 extconf.rb
 pam_handle.c
