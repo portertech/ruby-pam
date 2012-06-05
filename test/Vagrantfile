@@ -1,0 +1,10 @@
+Vagrant::Config.run do |config|
+  config.vm.box = "ubuntu-1204-i386"
+  config.vm.box_url = "http://vagrant.sensuapp.org/ubuntu-1204-i386.box"
+  config.vm.customize [
+    "modifyvm", :id,
+    "--name", "Ubuntu",
+    "--memory", "512"
+  ]
+  config.vm.provision :shell, :path => "test.sh"
+end
