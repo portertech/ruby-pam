@@ -1,1 +1,1 @@
-pam.o : pam.c pam_handle.c $(hdrdir)/ruby.h $(hdrdir)/rubyio.h
+pam.o : pam.c pam_handle.c $(hdrdir)/ruby.h $(hdrdir)/io.h

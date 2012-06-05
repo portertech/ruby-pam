@@ -43,7 +43,7 @@ rb_pam_inner_conv(int num_msg,
   };
 
   /*
-  while( RARRAY(rres)->len < num_msg ){
+  while( RARRAY_LEN(rres) < num_msg ){
     rb_ary_push(rres,Qnil);
   };
   */
@@ -58,7 +58,7 @@ rb_pam_inner_conv(int num_msg,
       VALUE r_resp = rb_struct_getmember(rrep,rb_intern("resp"));
       VALUE r_retcode = rb_struct_getmember(rrep,rb_intern("resp_retcode"));
 
-      reply[i].resp = ((r_resp != Qnil) ? strdup(STR2CSTR(r_resp)) : NULL);
+      reply[i].resp = ((r_resp != Qnil) ? strdup(StringValuePtr(r_resp)) : NULL);
       reply[i].resp_retcode = ((r_retcode != Qnil) ? NUM2INT(r_retcode) : 0);
     }
     else{
@@ -115,7 +115,7 @@ rb_pam_handle_new(pam_handle_t *pamh)
   pam->start = 0;
   pam->status = PAM_SUCCESS;
   pam->conv = NULL;
-  
+
   return obj;
 };
 
@@ -142,19 +142,19 @@ rb_pam_handle_initialize(int argc, VALUE argv[], VALUE self)
   pam_handle_t *pamh = NULL;
   char *c_service = NULL;
   char *c_user = NULL;
-  struct pam_conv *c_conv = NULL; 
+  struct pam_conv *c_conv = NULL;
   VALUE service, user, conv, data;
   int   status;
 
   switch( rb_scan_args(argc, argv, "31", &service, &user, &conv, &data) ){
   case 3:
-    c_service = STR2CSTR(service);
-    c_user = STR2CSTR(user);
+    c_service = StringValuePtr(service);
+    c_user = StringValuePtr(user);
     CREATE_PAM_CONV2(c_conv,conv,Qnil);
     break;
   case 4:
-    c_service = STR2CSTR(service);
-    c_user = STR2CSTR(user);
+    c_service = StringValuePtr(service);
+    c_user = StringValuePtr(user);
     CREATE_PAM_CONV2(c_conv,conv,data);
     break;
   default:
@@ -217,7 +217,7 @@ rb_pam_handle_end(VALUE self)
   if( pam->conv ){
     free(pam->conv);
   };
-  
+
   return Qnil;
 };
 
@@ -230,17 +230,17 @@ rb_pam_handle_conv(VALUE self, VALUE ary)
   struct pam_response *resp;
   int status, i, msg_len;
   VALUE r;
-  
+
   Check_Type(ary, T_ARRAY);
   Data_Get_Struct(self, struct rb_pam_struct, pam);
   status = pam_get_item(pam->ptr, PAM_CONV, (void*)(&conv));
   if( status != PAM_SUCCESS || !conv )
     rb_pam_raise(status, "rb_pam_handle_conv");
 
-  msg_len = RARRAY(ary)->len;
+  msg_len = RARRAY_LEN(ary);
   msg = (struct pam_message **)ALLOCA_N(struct pam_message *, msg_len);
   for( i=0; i<msg_len; i++ ){
-    VALUE elem = RARRAY(ary)->ptr[i];
+    VALUE elem = RARRAY_PTR(ary)[i];
     VALUE m_style, m_msg;
     m_style = rb_struct_getmember(elem, rb_intern("msg_style"));
     m_msg = rb_struct_getmember(elem, rb_intern("msg"));
@@ -251,7 +251,7 @@ rb_pam_handle_conv(VALUE self, VALUE ary)
     }
     else{
       msg[i]->msg = (char*)ALLOCA_N(char, RSTRING(m_msg)->len + 1);
-      strcpy((char*)(msg[i]->msg), STR2CSTR(m_msg));
+      strcpy((char*)(msg[i]->msg), StringValuePtr(m_msg));
     };
   };
 
@@ -318,7 +318,7 @@ rb_pam_handle_authenticate(int argc, VALUE argv[], VALUE self)
   default:
     rb_bug("rb_pam_handle_authenticate");
   }
-  
+
   Data_Get_Struct(self,struct rb_pam_struct,pam);
   if( (pam->status = pam_authenticate(pam->ptr,c_flag)) != PAM_SUCCESS ){
     rb_pam_raise(pam->status, "pam_authenticate");
@@ -375,7 +375,7 @@ rb_pam_handle_set_fail_delay(VALUE self, VALUE msec)
 #endif
 
   return Qnil;
-};  
+};
 
 VALUE
 rb_pam_handle_setcred(int argc, VALUE argv[], VALUE self)
@@ -410,7 +410,7 @@ rb_pam_handle_setcred(int argc, VALUE argv[], VALUE self)
 #endif
 
   return Qnil;
-};  
+};
 
 VALUE
 rb_pam_handle_chauthtok(int argc, VALUE argv[], VALUE self)
@@ -446,7 +446,7 @@ rb_pam_handle_chauthtok(int argc, VALUE argv[], VALUE self)
 #endif
 
   return Qnil;
-};  
+};
 
 
 VALUE
@@ -482,7 +482,7 @@ rb_pam_handle_close_session(int argc, VALUE argv[], VALUE self)
 #endif
 
   return Qnil;
-};  
+};
 
 static VALUE
 rb_pam_handle_open_session_ensure(VALUE self)
@@ -527,7 +527,7 @@ rb_pam_handle_open_session(int argc, VALUE argv[], VALUE self)
   };
 
   return Qnil;
-};  
+};
 
 
 VALUE
@@ -546,7 +546,7 @@ rb_pam_handle_set_item(VALUE self, VALUE type, VALUE item)
   case PAM_RHOST:
   case PAM_RUSER:
   case PAM_USER_PROMPT:
-    c_item = (void*)STR2CSTR(item);
+    c_item = (void*)StringValuePtr(item);
     break;
   case PAM_CONV:
     {
@@ -627,7 +627,7 @@ rb_pam_handle_putenv(VALUE self, VALUE val)
 
   Data_Get_Struct(self,struct rb_pam_struct,pam);
   pam->status = -1;
-  return INT2NUM(pam_putenv(pam->ptr,STR2CSTR(val)));
+  return INT2NUM(pam_putenv(pam->ptr,StringValuePtr(val)));
 #else
   rb_notimplemented();
 #endif
@@ -642,7 +642,7 @@ rb_pam_handle_getenv(VALUE self, VALUE val)
 
   Data_Get_Struct(self,struct rb_pam_struct,pam);
   pam->status = -1;
-  return( (str = pam_getenv(pam->ptr,STR2CSTR(val))) ? rb_str_new2(str) : Qnil);
+  return( (str = pam_getenv(pam->ptr,StringValuePtr(val))) ? rb_str_new2(str) : Qnil);
 #else
   rb_notimplemented();
 #endif
