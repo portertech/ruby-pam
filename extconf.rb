@@ -1,5 +1,5 @@
-#!/usr/bin/env ruby-1.6
-#                                          -*- ruby -*-
+#!/usr/bin/env ruby
+#
 # extconf.rb
 #
 # $Id: extconf.rb,v 1.1 2002/11/06 08:04:48 ttate Exp $
