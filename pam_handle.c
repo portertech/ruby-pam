@@ -250,7 +250,7 @@ rb_pam_handle_conv(VALUE self, VALUE ary)
       msg[i]->msg = NULL;
     }
     else{
-      msg[i]->msg = (char*)ALLOCA_N(char, RSTRING(m_msg)->len + 1);
+      msg[i]->msg = (char*)ALLOCA_N(char, RSTRING_LEN(m_msg) + 1);
       strcpy((char*)(msg[i]->msg), StringValuePtr(m_msg));
     };
   };
