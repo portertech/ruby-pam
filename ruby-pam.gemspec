@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = s.summary
   s.has_rdoc    = false
   s.files       = Dir.glob('*.{c,h}')
-  s.files       = [
+  s.files      += [
     'COPYING',
     'ChangeLog',
     'README',
